@@ -3,17 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# LCS specific files
-**/UI/API/Models/*.xml
-**/UI/API/RM12/*.xml
-**/Web/App_Data/
-**/Web.Express/App_Data/
-**/Web.TenantApp/App_Data/
-**/Web/OwnerWebAccess/Content/Scripts/Plugins/
-**/Web/TenantWebAccess/Content/Scripts/Plugins/
-/UI/angular/.angular/
-/UI/angular/dist/
-
 # User-specific files
 *.rsuser
 *.suo
@@ -295,6 +284,7 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
+build/
 
 # Visual Studio 6 build log
 *.plg
