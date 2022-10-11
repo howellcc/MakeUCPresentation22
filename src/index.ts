@@ -1,3 +1,10 @@
-#!/usr/bin/env node
+class Main {
+   name: string = "World!";
 
-console.log('hey there!')
+   getName() {
+      return this.name;
+   }
+}
+
+let objMain = new Main();
+console.log("Hello ", objMain.getName());

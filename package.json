@@ -1,10 +1,10 @@
 {
-  "name": "tstester",
+  "name": "whatsoverhead",
   "version": "1.0.0",
-  "description": "Playground for me to test stuff",
+  "description": "Taking a look at what is overhead",
   "main": "index.js",
   "scripts": {
-    "tstest": "node ./node_modules/ts-node/dist/bin.js src/index.ts"
+    "whatsoverhead": "node ./node_modules/ts-node/dist/bin.js src/index.ts"
   },
   "author": "Me",
   "license": "ISC",
@@ -13,6 +13,15 @@
     "typescript": "^4.8.4"
   },
   "devDependencies": {
-    "@types/node": "^18.8.2"
-  }
+    "@types/node": "^18.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/howellcc/MakeUCPresentation22.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/howellcc/MakeUCPresentation22/issues"
+  },
+  "homepage": "https://github.com/howellcc/MakeUCPresentation22#readme"
 }
