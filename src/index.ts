@@ -1,10 +1,22 @@
-class Main {
-   name: string = "World!";
+import { exit } from "process";
 
-   getName() {
-      return this.name;
+import { OpenSkyAPIService } from "./opensky/opensky-api.service";
+
+class Main {
+   private _srvc: OpenSkyAPIService;
+
+   constructor() {
+      this._srvc = new OpenSkyAPIService();
+
+      try {
+         this._srvc.tryLoadCredentials();
+      } catch (ex) {
+         console.log(`Error: ${ex}`);
+         exit(1);
+      }
+
+      console.log("woooo success");
    }
 }
 
 let objMain = new Main();
-console.log("Hello ", objMain.getName());
