@@ -376,3 +376,6 @@ FodyWeavers.xsd
 
 # Jetbrains Rider
 .idea/
+
+#mystuff
+opensky-config.json
