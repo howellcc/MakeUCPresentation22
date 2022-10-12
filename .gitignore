@@ -378,4 +378,4 @@ FodyWeavers.xsd
 .idea/
 
 #mystuff
-opensky-config.json
+src/opensky/opensky-config.json
