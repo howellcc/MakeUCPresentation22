@@ -1,21 +1,35 @@
-import { exit } from "process";
+import { BoundingBox, OpenSkyApi } from "opensky-api";
+import { Credentials } from "opensky-api/build/main/types/Credentials";
+import { StateVector } from "opensky-api/build/main/types/StateVector";
 
-import { OpenSkyAPIService } from "./opensky/opensky-api.service";
+import * as openskyConfig from "./opensky-config.json";
 
 class Main {
-   private _srvc: OpenSkyAPIService;
+   private api: OpenSkyApi;
 
    constructor() {
-      this._srvc = new OpenSkyAPIService();
-
       try {
-         this._srvc.tryLoadCredentials();
+         //authenticated
+         const creds: Credentials = {
+            username: openskyConfig.username,
+            password: openskyConfig.password,
+         };
+         this.api = new OpenSkyApi(creds);
       } catch (ex) {
-         console.log(`Error: ${ex}`);
-         exit(1);
+         //unauthenticated
+         this.api = new OpenSkyApi();
       }
 
-      console.log("woooo success");
+      const bounds = new BoundingBox(39.04, 39.3, -84.71, -84.25);
+
+      this.api.getStates(null, null, bounds)?.then((statesobj) => {
+         const time: number = statesobj.time;
+         const states: Array<StateVector> = statesobj.states;
+
+         console.log(states);
+         let x = 1;
+         x = x + 1;
+      });
    }
 }
 
