@@ -1,0 +1,38 @@
+{
+   "files.exclude": {
+      "**/*.js": {
+         "when": "$(basename).ts"
+      },
+      "**/*.js.map": {
+         "when": "$(basename)"
+      },
+      "node_modules/": true,
+      "bin/": true,
+      "build/": true,
+      "obj/": true,
+      "storybook-static/": true,
+      "documentation/": true,
+      ".angular/": true
+   },
+   "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+   },
+   "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+   },
+   "scss.scannerExclude": ["**/.git", "**/node_modules", "**/bower_components"],
+   "editor.detectIndentation": false,
+   "editor.insertSpaces": true,
+   "editor.tabSize": 3,
+   "html.format.wrapAttributes": "force-expand-multiline",
+   "html.format.wrapLineLength": 120,
+   "typescript.preferences.importModuleSpecifier": "relative",
+   "typescript.tsdk": "node_modules/typescript/lib",
+   "prettier.requireConfig": true,
+   "editor.formatOnSave": true,
+   "typescriptHero.imports.stringQuoteStyle": "\"",
+   "typescriptHero.imports.multiLineWrapThreshold": 500,
+   "typescriptHero.imports.organizeOnSave": true,
+   "terminal.integrated.scrollback": 1000000,
+   "window.title": "${dirty}${activeEditorShort}${separator}${rootPath}${separator}${appName}"
+}

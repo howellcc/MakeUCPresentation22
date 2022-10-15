@@ -1,0 +1,17 @@
+{
+   "folders": [
+      {
+         "path": "./step3"
+      }
+   ],
+   "settings": {
+      "scss.scannerExclude": [
+         "**/.git",
+         "**/node_modules",
+         "**/bower_components"
+      ],
+      "typescript.tsdk": "node_modules/typescript/lib",
+      "terminal.integrated.scrollback": 1000000,
+      "window.title": "${dirty}${activeEditorShort}${separator}${rootPath}${separator}${appName}"
+   }
+}
