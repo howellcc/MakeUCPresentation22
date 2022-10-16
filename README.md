@@ -1,12 +1,16 @@
 # MakeUC Presentation '22
 This is where I will I will keep any resources around my MakeUC presentation. 
 
+## Prerequisites
+Obtain a free [Opensky Network](https://opensky-network.org/) login and add those credentials to the opensky-config.json for local use. 
 
-## Development Environtment
-I did all this work using Visual Studio Code and NodeJs 16.14.2LTS. 
+## Development Environment Setup
+I did all this work using Visual Studio Code and NodeJs 16.14.2LTS. (Though earlier versions work) NodeJs can be installed from their [website](https://nodejs.org/en/blog/release/v16.14.2/) or by using a [Node Version Manager](https://github.com/coreybutler/nvm-windows). 
 
-### Install dependencies
-On Windows
+Each "step" is meant to be opened as its own workspace in VSCode. You can use the included *.code-workspace files. 
+
+### Dependencies
+On Windows (within VSCode)
 ```
 task install-npm-packages
 ```
@@ -18,7 +22,12 @@ npm install --save-dev @types/node
 ```
 
 ## Running Each Step
-Each "step" is meant to be opened as its own workspace in VSCode. Once in the respective workspace type the following into the terminal.
+Once in the respective workspace type the following into the terminal.
 ``` 
-npm run whatsoverhead
+npm run makeuc
 ```
+
+## Special Thanks To
+- The OpenSky Network, https://opensky-network.org for their excellent and free api. 
+- [Raed](https://github.com/raed667) for his [OpenSky-API](https://www.npmjs.com/package/opensky-api) NPM package. It saved me a tremendous amount of time while putting together these resources. 
+
