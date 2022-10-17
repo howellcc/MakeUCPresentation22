@@ -20,14 +20,17 @@ class Main {
    // private readonly upperright: Position = new Position(39.4462, -83.8290);
 
    constructor() {
-      try {
+      if (
+         openskyConfig.username.length > 0 &&
+         openskyConfig.password.length > 0
+      ) {
          //authenticated
          const creds: Credentials = {
             username: openskyConfig.username,
             password: openskyConfig.password,
          };
          this.api = new OpenSkyApi(creds);
-      } catch (ex) {
+      } else {
          //unauthenticated
          this.api = new OpenSkyApi();
       }

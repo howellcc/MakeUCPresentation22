@@ -10,17 +10,21 @@ class Main {
    private readonly elonsPlane: string = "a835af";
 
    constructor() {
-      try {
+      if (
+         openskyConfig.username.length > 0 &&
+         openskyConfig.password.length > 0
+      ) {
          //authenticated
          const creds: Credentials = {
             username: openskyConfig.username,
             password: openskyConfig.password,
          };
          this.api = new OpenSkyApi(creds);
-      } catch (ex) {
+      } else {
          //unauthenticated
          this.api = new OpenSkyApi();
       }
+
 
       let now = new Date();
       let nowS = Math.round(now.getTime() / 1000);
