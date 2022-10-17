@@ -9,9 +9,13 @@ import * as openskyConfig from "../../opensky-config.json";
 class Main {
    private api: OpenSkyApi;
 
+   //Bounding box for UC
+   private readonly lowerleft: Position = new Position(39.1285, -84.5206);
+   private readonly upperright: Position = new Position(39.1354, -84.5107);
+
    //Bounding box for I-275
-   private readonly lowerleft: Position = new Position(39.0473, -84.718);
-   private readonly upperright: Position = new Position(39.3017, -84.2525);
+   // private readonly lowerleft: Position = new Position(39.0473, -84.718);
+   // private readonly upperright: Position = new Position(39.3017, -84.2525);
 
    //Larger Bounding box
    // private readonly lowerleft: Position = new Position(38.8053, -85.1871);
