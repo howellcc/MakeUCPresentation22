@@ -77,6 +77,7 @@ class Main {
                   aircraftState.heading - bearingToUs
                );
 
+               //very rough approximation.
                if (bearingDiff < 5) {
                   aircraftInfo += "Headed toward us: YES\n";
                } else {
