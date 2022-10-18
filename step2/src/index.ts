@@ -91,7 +91,7 @@ class Main {
       });
    }
 
-   willItPassNearby(
+   private willItPassNearby(
       aircraftPosition: Position,
       aircraftBearing: DegreesTrue,
       ourPosition: Position,
