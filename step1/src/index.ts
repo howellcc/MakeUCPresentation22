@@ -2,7 +2,6 @@ import { Position } from "aviation-math";
 import { BoundingBox, OpenSkyApi } from "opensky-api";
 import { Credentials } from "opensky-api/build/main/types/Credentials";
 import { StateVector } from "opensky-api/build/main/types/StateVector";
-import { exit } from "process";
 
 import * as openskyConfig from "../../opensky-config.json";
 
@@ -56,9 +55,7 @@ class Main {
          //Output # of aircraft found
          console.log(`${aircraftStates.length} Aircraft Found!\n`);
 
-         if (aircraftStates.length === 0) {
-            exit(0);
-         } else {
+         if (aircraftStates.length > 0) {
             var treeify = require("treeify");
             console.log(treeify.asTree(aircraftStates, true));
          }
