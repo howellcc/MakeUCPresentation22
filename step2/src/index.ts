@@ -19,8 +19,6 @@ class Main {
    // private readonly lowerleft: Position = new Position(38.8053, -85.1871);
    // private readonly upperright: Position = new Position(39.4462, -83.829);
 
-   private readonly visibleDistanceKm = 5;
-
    constructor() {
       if (
          openskyConfig.username.length > 0 &&
@@ -67,19 +65,24 @@ class Main {
                   aircraftState.longitude
                );
 
+               //Calculate bearing to our location
+               const bearingToUs: DegreesTrue = getBearing(
+                  aircraftPosition,
+                  this.ourLocation
+               );
+
                aircraftInfo += `${aircraftState.icao24} - ${aircraftState.callsign}\n`;
 
-               if (
-                  this.willItPassNearby(
-                     aircraftPosition,
-                     aircraftState.heading,
-                     this.ourLocation,
-                     this.visibleDistanceKm
-                  )
-               ) {
+               let bearingDiff: number = Math.abs(
+                  aircraftState.heading - bearingToUs
+               );
+
+               //very rough approximation.
+               if (bearingDiff < 5) {
                   aircraftInfo += "Headed toward us: YES\n";
                } else {
                   aircraftInfo += "Headed toward us: NO\n";
+                  aircraftInfo += `Bearing Diff: ${bearingDiff.toFixed(2)}\n`;
                }
                aircraftInfo += "\n";
             }
@@ -89,122 +92,6 @@ class Main {
             `${flyingAircraftCount} Aircraft Found!\n\n${aircraftInfo}`
          );
       });
-   }
-
-   private willItPassNearby(
-      aircraftPosition: Position,
-      aircraftBearing: DegreesTrue,
-      ourPosition: Position,
-      visibilityKm: number
-   ): boolean {
-      //get the bearing from the aircraft directly to our location.
-      const bearingToOurLocation: DegreesTrue = getBearing(
-         aircraftPosition,
-         ourPosition
-      );
-
-      //special case shortcut
-      if (aircraftBearing === bearingToOurLocation) {
-         return true;
-      }
-
-      //get boundry points based on visibility
-      const boundryPointClockwise = this.getPointByBearingAndDistance(
-         ourPosition,
-         this.clampAngle(bearingToOurLocation + 90), // 90 degrees off in 1 direction
-         visibilityKm
-      );
-      const boundryPointCounterClockwise = this.getPointByBearingAndDistance(
-         ourPosition,
-         this.clampAngle(bearingToOurLocation - 90), // 90 degrees off in the opposite direction
-         visibilityKm
-      );
-
-      //Get Bearings from aircraft to boundry points.
-      const bearingToCockwiseBoundryPt: DegreesTrue = getBearing(
-         aircraftPosition,
-         boundryPointClockwise
-      );
-
-      const bearingToCounterClockwiseBoundryPt: DegreesTrue = getBearing(
-         aircraftPosition,
-         boundryPointCounterClockwise
-      );
-
-      return this.isBearingBetween2Bearings(
-         aircraftBearing,
-         bearingToCockwiseBoundryPt,
-         bearingToCounterClockwiseBoundryPt
-      );
-   }
-
-   private getPointByBearingAndDistance(
-      startingPoint: Position,
-      bearing: DegreesTrue,
-      distanceKm: number
-   ): Position {
-      const R: number = 6378.1; //Radius of the Earth
-      const bearingRad = this.DegToRad(bearing); //Bearing converted to radians
-
-      const lat1 = this.DegToRad(startingPoint.lat);
-      const lon1 = this.DegToRad(startingPoint.lon);
-
-      const lat2 = Math.asin(
-         Math.sin(lat1) * Math.cos(distanceKm / R) +
-            Math.cos(lat1) * Math.sin(distanceKm / R) * Math.cos(bearingRad)
-      );
-
-      const lon2 =
-         lon1 +
-         Math.atan2(
-            Math.sin(bearingRad) * Math.sin(distanceKm / R) * Math.cos(lat1),
-            Math.cos(distanceKm / R) - Math.sin(lat1) * Math.sin(lat2)
-         );
-
-      return new Position(this.RadToDeg(lat2), this.RadToDeg(lon2));
-   }
-
-   private DegToRad(degrees: number): number {
-      return degrees * (Math.PI / 180);
-   }
-
-   private RadToDeg(radians: number): number {
-      return radians * (180 / Math.PI);
-   }
-
-   private clampAngle(angle: DegreesTrue): DegreesTrue {
-      while (angle >= 360) {
-         angle -= 360;
-      }
-      while (angle < 0) {
-         angle += 360;
-      }
-      return angle;
-   }
-
-   private isBearingBetween2Bearings(
-      aircraftBearing: DegreesTrue,
-      bearingToClockwiseBoundryPt: DegreesTrue,
-      bearingToCounterClockwiseBoundryPt: DegreesTrue
-   ): boolean {
-      // easy scenario. Boundry range doesn't cross due North.
-      if (
-         bearingToCounterClockwiseBoundryPt < bearingToClockwiseBoundryPt &&
-         bearingToClockwiseBoundryPt - bearingToCounterClockwiseBoundryPt < 180
-      ) {
-         return (
-            bearingToCounterClockwiseBoundryPt <= aircraftBearing &&
-            aircraftBearing <= bearingToClockwiseBoundryPt
-         );
-      } else {
-         //aircraft bearing must be between one of the boundaries and North.
-         return (
-            (bearingToCounterClockwiseBoundryPt <= aircraftBearing &&
-               aircraftBearing < 360) ||
-            (0 <= aircraftBearing &&
-               aircraftBearing <= bearingToClockwiseBoundryPt)
-         );
-      }
    }
 }
 
