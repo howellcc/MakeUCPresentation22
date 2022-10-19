@@ -1,5 +1,3 @@
-import { exit } from "process";
-
 import * as openskyConfig from "../../opensky-config.json";
 import { OpenSkyApi } from "./opensky/build/main";
 import { Credentials } from "./opensky/build/main/types/Credentials";
@@ -40,9 +38,7 @@ class Main {
             //Output # of aircraft found
             console.log(`${flights.length} Flights Found\n`);
 
-            if (flights.length === 0) {
-               exit(0);
-            } else {
+            if (flights.length > 0) {
                var treeify = require("treeify");
                console.log(treeify.asTree(flights, true));
             }
