@@ -92,14 +92,14 @@ class Main {
 
                   //Calculate ETA
                   const estimatedFlightTimeS =
-                     (distanceNautMi * 1852) / aircraftState.velocity; //1852 m == 1 nautical mile
+                     (distanceNautMi * 1852) / aircraftState.velocity; //1852m == 1 nautical mile
                   let asOfTime_ms = asOfTime.getTime();
                   const ETA = new Date(
-                     asOfTime_ms + 1000 * estimatedFlightTimeS
+                     asOfTime_ms + 1000 * estimatedFlightTimeS // adding epoch_ms to epoch_s. 1000ms in 1s
                   );
                   const now = new Date();
                   let secondsFromNow: number =
-                     (ETA.getTime() - now.getTime()) / 1000;
+                     (ETA.getTime() - now.getTime()) / 1000; //1000ms in 1s
 
                   aircraftInfo += `ETA: ${ETA.toLocaleString()} - (${secondsFromNow.toFixed(
                      0

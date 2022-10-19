@@ -25,15 +25,12 @@ class Main {
          this.api = new OpenSkyApi();
       }
 
-
       let now = new Date();
-      let nowS = Math.round(now.getTime() / 1000);
+      let nowS = Math.round(now.getTime() / 1000); //1000ms in 1s
 
       let oneWeekAgo = new Date();
-      let oneWeekOfMs: number = 1000 * 60 * 60 * 24 * 7; //1000ms * 60s/min * 60min/hr * 24hr/day * 7days;
-      let oneWeekAgoS: number = Math.round(
-         (oneWeekAgo.getTime() - oneWeekOfMs) / 1000
-      );
+      oneWeekAgo.setDate(now.getDate() - 7); //7 days ago
+      let oneWeekAgoS: number = Math.round(oneWeekAgo.getTime() / 1000);
 
       this.api
          .getFlightsByAircraft(this.elonsPlane, oneWeekAgoS, nowS)
