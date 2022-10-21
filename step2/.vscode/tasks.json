@@ -7,7 +7,7 @@
       {
          "label": "install-npm-packages",
          "type": "shell",
-         "command": "powershell -file ${cwd}/.vscode/install-npm-packages.ps1",
+         "command": "${workspaceFolder}/.vscode/install-npm-packages.sh",
          "problemMatcher": []
       }
    ]
