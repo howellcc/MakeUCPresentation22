@@ -10,12 +10,7 @@ I did all this work using [Visual Studio Code](https://code.visualstudio.com/Dow
 Each "step" is meant to be opened as its own workspace in VSCode. You can use the included *.code-workspace files. 
 
 ### Dependencies
-On Windows (within VSCode)
-```
-task install-npm-packages
-```
-
-On Linux/Mac
+Install dependencies from NPM by coping the following into VSCode's terminal.
 ```
 npm install --save typescript ts-node opensky-api treeify aviation-math
 npm install --save-dev @types/node
