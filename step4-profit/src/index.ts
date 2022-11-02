@@ -1,7 +1,8 @@
+import { OpenSkyApi } from "opensky-api";
+import { Credentials } from "opensky-api/build/main/types/Credentials";
+import { Flight } from "opensky-api/build/main/types/Flight";
+
 import * as openskyConfig from "../../opensky-config.json";
-import { OpenSkyApi } from "./opensky/build/main";
-import { Credentials } from "./opensky/build/main/types/Credentials";
-import { Flight } from "./opensky/build/main/types/Flight";
 
 class Main {
    private api: OpenSkyApi;
